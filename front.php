@@ -1,8 +1,8 @@
 <?php
 
 header('Content-Type: text/html; charset=utf-8');
-$conn = mysqli_connect('localhost', 'zolotukhin', 'fn9k5dkF', 'zolotukhin');
-mysqli_set_charset($conn, 'utf-8');
+$conn = mysqli_connect('localhost', 'crm', '6QjgPjxQ', 'crm');
+mysqli_set_charset($conn, 'utf8');
 
 require_once('./back.php');
 
