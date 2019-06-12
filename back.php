@@ -1,6 +1,6 @@
 <?php
 
-    function getAllTypes($conn)
+    function getTypes($conn)
     {
         $res = mysqli_query($conn, 'SELECT * FROM content');
         $result = array();
@@ -12,14 +12,15 @@
         return $result;
     }
 
-    function getTypes($conn) {
-        $res = mysqli_query($conn, 'SELECT * FROM DocumentTypes WHERE ifActive=1');
-        $result = array();
+    function addType($conn, $name, $description, $active) {
+        $name = '"'.$name.'"';
+        $active = $active == 'true' ? 1 : 0;
+        $description = $description == '' ? 'NULL' : '"'.$description.'"';
 
-        while($record = mysqli_fetch_array($res)) {
-            $result[] = $record;
-        }
-
-        return $result;
+        mysqli_query(
+            $conn,
+            'INSERT INTO DocumentTypes (name, description, ifActive) VALUES
+            ('.$name.', '.$description.', '.$active.')'
+        );
     }
 ?>
