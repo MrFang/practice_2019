@@ -58,7 +58,7 @@ function renderDocumentTable($conn) {
     }
 
     $result.='</table>';
-
+    $result.= '<a href="./front.php?action=create">create</a>';
     return $result;
 }
 
