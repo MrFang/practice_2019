@@ -16,7 +16,7 @@ if (isset($_POST['action'])) {
             updateType($conn, $_POST['id'], $_POST['name'], $_POST['description'], $_POST['active']);
             break;
         case 'delete':
-            // TODO: Invoke delete func
+            deleteType($conn, $_POST['id']);
             break; 
     }
 }
@@ -87,6 +87,17 @@ function renderEditForm($conn, $id) {
         '<option>'.($item['ifActive'] == 1 ? 'false' : 'true').'</option>'.
     '</select><br/>';
     $result.= '<input type="submit" value="Edit">';
+    $result.= '</form>';
+
+    return $result;
+}
+
+function renderDeleteSubmitionForm($id) {
+    $result = '<form method="POST" action="./front.php?action=read">';
+    $result.= '<input type="hidden" name="action" value="delete">';
+    $result.= '<input type="hidden" name="id" value="'.$id.'">';
+    $result.= 'Please, confirm the action <br/>';
+    $result.= '<input type="submit" value="Delete">';
     $result.= '</form>';
 
     return $result;

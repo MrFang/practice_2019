@@ -17,6 +17,9 @@
         case 'update':
             echo renderEditForm($conn, $_GET['id']);
             break;
+        case 'delete':
+            echo renderDeleteSubmitionForm($_GET['id']);
+            break;
     }?>
     <a href="./front.php?action=create">create</a>
 </body>

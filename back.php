@@ -43,4 +43,11 @@ function updateType($conn, $id, $name, $description, $active) {
     );
 }
 
+function deleteType($conn, $id) {
+    mysqli_query(
+        $conn,
+        'DELETE FROM DocumentTypes WHERE id='.$id
+    );
+}
+
 ?>
