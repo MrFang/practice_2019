@@ -1,5 +1,6 @@
 <?php
 
+/** Returns array of all records in DB */
 function getTypes($conn) {
     $res = mysqli_query($conn, 'SELECT * FROM DocumentTypes');
     $result = array();
@@ -11,6 +12,7 @@ function getTypes($conn) {
     return $result;
 }
 
+/** Adds new record into DB */
 function addType($conn, $name, $description, $active) {
     $name = '"'.$name.'"';
     $active = $active == 'true' ? 1 : 0;
@@ -23,6 +25,7 @@ function addType($conn, $name, $description, $active) {
     );
 }
 
+/** Returns one record from DB with id == $id */
 function getTypeInfo($conn, $id) {
     $res = mysqli_query(
         $conn,
@@ -32,6 +35,7 @@ function getTypeInfo($conn, $id) {
     return mysqli_fetch_array($res);
 }
 
+/** Updates one record in DB with id == $id */
 function updateType($conn, $id, $name, $description, $active) {
     $name = '"'.$name.'"';
     $active = $active == 'true' ? 1 : 0;
@@ -43,6 +47,7 @@ function updateType($conn, $id, $name, $description, $active) {
     );
 }
 
+/** Deletes one record from DB with id == $id */
 function deleteType($conn, $id) {
     mysqli_query(
         $conn,

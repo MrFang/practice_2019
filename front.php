@@ -1,12 +1,13 @@
 <?php
 
 header('Content-Type: text/html; charset=utf-8');
+/** Init DB */
 $conn = mysqli_connect('localhost', 'crm', '6QjgPjxQ', 'crm');
 mysqli_set_charset($conn, 'utf8');
 
 require_once('./back.php');
 
-/** Processing */
+/** Processing POST requests*/
 if (isset($_POST['action'])) {
     switch($_POST['action']) {
         case 'create':
@@ -21,8 +22,8 @@ if (isset($_POST['action'])) {
     }
 }
 
+/** Set environment */
 $page = $_GET['action'];
-
 switch($page) {
     case 'create':
         $title = 'Add document type';
@@ -38,6 +39,7 @@ switch($page) {
         break;
 }
 
+/** Retutns html table that contains info from DB */
 function renderDocumentTable($conn) {
     $records = getTypes($conn);
     $result = '<table class="table">';
@@ -59,9 +61,11 @@ function renderDocumentTable($conn) {
 
     $result.='</table>';
     $result.= '<a href="./front.php?action=create">create</a>';
+    
     return $result;
 }
 
+/** Returns form to add new document type into DB */
 function renderAddForm() {
     $result = '<form method="POST" action="./front.php?action=read">';
     $result.= '<input type="hidden" name="action" value="create">';
@@ -74,6 +78,7 @@ function renderAddForm() {
     return $result;
 }
 
+/** Returns form to edit existing document type */
 function renderEditForm($conn, $id) {
     $item = getTypeInfo($conn, $id);
 
@@ -92,6 +97,7 @@ function renderEditForm($conn, $id) {
     return $result;
 }
 
+/** Returns form that asks user's confirmation to delete existing document type */
 function renderDeleteSubmitionForm($id) {
     $result = '<form method="POST" action="./front.php?action=read">';
     $result.= '<input type="hidden" name="action" value="delete">';
