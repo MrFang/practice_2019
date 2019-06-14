@@ -13,6 +13,7 @@
             echo renderAddForm();
             break;
         case 'update':
+            echo renderDocumentTable($conn);
             echo renderEditForm($conn, $_GET['id']);
             break;
         case 'delete':

@@ -20,6 +20,8 @@ if (isset($_POST['action'])) {
             deleteType($conn, $_POST['id']);
             break; 
     }
+
+    echo '<p>Success!</p>';
 }
 
 /** Set environment */
@@ -78,16 +80,19 @@ function renderAddForm() {
 function renderEditForm($conn, $id) {
     $item = getTypeInfo($conn, $id);
 
-    $result = '<form method="POST" action="./front.php?action=read">';
+    $result = '<p>Изменить запись</p>';
+    $result.= '<form method="POST" action="./front.php?action=read">';
     $result.= '<input type="hidden" name="action" value="update">';
     $result.= '<input type="hidden" name="id" value="'.$id.'">';
-    $result.= 'NAME: <input type="text" name="name" required value="'.$item['name'].'"></br>';
-    $result.= 'DESCRIPTION: <textarea name="description">'.$item['description'].'</textarea></br>';
-    $result.= 'ACTIVE: <select name="active" required>'.
+    $result.= '<table>';
+    $result.= '<tr><td>NAME:</td><td><input type="text" name="name" required value="'.$item['name'].'"></td></tr>';
+    $result.= '<tr><td>DESCRIPTION:</td><td><textarea name="description">'.$item['description'].'</textarea></td></tr>';
+    $result.= '<tr><td>ACTIVE:</td><td><select name="active" required>'.
         '<option>'.($item['ifActive'] == 1 ? 'true' : 'false').'</option>'.
         '<option>'.($item['ifActive'] == 1 ? 'false' : 'true').'</option>'.
-    '</select><br/>';
-    $result.= '<input type="submit" value="Edit">';
+    '</select></td></tr>';
+    $result.= '<tr><td colspan="2"><input type="submit" value="Edit"></td></tr>';
+    $result.= '</table>';
     $result.= '</form>';
 
     return $result;
