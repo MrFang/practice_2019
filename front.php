@@ -25,9 +25,6 @@ if (isset($_POST['action'])) {
 /** Set environment */
 $page = $_GET['action'];
 switch($page) {
-    case 'create':
-        $title = 'Add document type';
-        break;
     case 'read':
         $title = 'Document types';
         break;
@@ -42,8 +39,7 @@ switch($page) {
 /** Retutns html table that contains info from DB */
 function renderDocumentTable($conn) {
     $records = getTypes($conn);
-    $result = '<table class="table">';
-    $result.='<tr><td>id</td><td>name</td><td>description</td><td>active</td><td>actions</td></tr>';
+    $result = '<table border="2">';
 
     for ($i = 0; $i < count($records); $i++) {
         $result.=
@@ -52,27 +48,27 @@ function renderDocumentTable($conn) {
         '<td>'.$records[$i]['name'].'</td>'.
         '<td>'.$records[$i]['description'].'</td>'.
         '<td>'.$records[$i]['ifActive'].'</td>'.
-        '<td>'.
-            '<a href="./front.php?action=update&id='.$records[$i]['id'].'">edit</a><br/>'.
-            '<a href="./front.php?action=delete&id='.$records[$i]['id'].'">delete</a>'.
-        '</td>'.
+        '<td><a href="./front.php?action=update&id='.$records[$i]['id'].'">Edit</a></td>'.
+        '<td><a href="./front.php?action=delete&id='.$records[$i]['id'].'">Delete</a></td>'.
         '</tr>';
     }
 
     $result.='</table>';
-    $result.= '<a href="./front.php?action=create">create</a>';
     
     return $result;
 }
 
 /** Returns form to add new document type into DB */
 function renderAddForm() {
-    $result = '<form method="POST" action="./front.php?action=read">';
+    $result = '<p> Добавить новую запись</p>';
+    $result.= '<form method="POST" action="./front.php?action=read">';
     $result.= '<input type="hidden" name="action" value="create">';
-    $result.= 'NAME: <input type="text" name="name" required><br/>';
-    $result.= 'DESCRIPRION: <textarea name="description"></textarea><br/>';
-    $result.= 'ACTIVE: <select name="active" required><option>true</option><option>false</option></select><br/>';
-    $result.= '<input type="submit" value="Add">';
+    $result.= '<table>';
+    $result.= '<tr><td>NAME:</td><td><input type="text" name="name" required></td></tr>';
+    $result.= '<tr><td>DESCRIPTION:</td><td><textarea name="description"></textarea></td></tr>';
+    $result.= '<tr><td>ACTIVE:</td><td><select name="active" required><option>true</option><option>false</option></select></td></tr>';
+    $result.= '<tr><td colspan="2"><input type="submit" value="Add"></td></tr>';
+    $result.= '</table>';
     $result.='</form>';
 
     return $result;

@@ -8,11 +8,9 @@
 </head>
 <body>
     <?switch($page) {
-        case 'create':
-            echo renderAddForm();
-            break;
         case 'read':
             echo renderDocumentTable($conn);
+            echo renderAddForm();
             break;
         case 'update':
             echo renderEditForm($conn, $_GET['id']);
