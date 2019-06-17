@@ -1,8 +1,9 @@
 <?php
 
 header('Content-Type: text/html; charset=utf-8');
+
 /** Init DB */
-$conn = mysqli_connect('localhost', 'crm', '6QjgPjxQ', 'crm');
+$conn = mysqli_connect('localhost', 'crm_izo', 'B0XCTeUx', 'crm_izo');
 mysqli_set_charset($conn, 'utf8');
 
 require_once('./back.php');
